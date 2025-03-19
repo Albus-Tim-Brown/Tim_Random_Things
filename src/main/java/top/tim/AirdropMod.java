@@ -33,33 +33,6 @@ public class AirdropMod implements ModInitializer {
 
         // 注册服务器每 Tick 事件
         ServerTickEvents.START_SERVER_TICK.register(this::onServerTick);
-        // 注册服务器启动完成事件
-        ServerLifecycleEvents.SERVER_STARTED.register(this::onServerStarted);
-    }
-
-    private void onServerStarted(MinecraftServer server) {
-        // 在此处执行你的指令
-        executeStartupCommands(server);
-    }
-
-    private void executeStartupCommands(MinecraftServer server) {
-        try {
-            // 示例：设置游戏时间为白天
-            server.getCommandManager().executeWithPrefix(
-                    server.getCommandSource().withLevel(4),
-                    "/time set day"
-            );
-
-            // 广播
-            server.getCommandManager().executeWithPrefix(
-                    server.getCommandSource(),
-                    "/tellraw @a {\"text\":\"服务器已启动！\",\"color\":\"green\"}"
-            );
-
-            LOGGER.info("服务器启动指令已执行！");
-        } catch (Exception e) {
-            LOGGER.error("执行启动指令失败: " + e.getMessage());
-        }
     }
 
     private void onServerTick(MinecraftServer server) {
