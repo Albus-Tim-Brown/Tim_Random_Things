@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "tim_random_things",
+  "version": "1.0-SNAPSHOT",
+  "name": "Tim_Random_Things",
+  "description": "随机生成战利品箱的 Mod",
+  "authors": ["Tim_Brown"],
+  "contact": {},
+  "license": "All-Rights-Reserved",
+  "icon": "assets/tim_random_things/icon.png",
+  "environment": "server",
+  "entrypoints": {
+    "main": [
+      "top.tim.AirdropMod"
+    ]
+  },
+  "mixins": [
+    "tim_random_things.mixins.json",
+    {
+      "config": "tim_random_things.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}

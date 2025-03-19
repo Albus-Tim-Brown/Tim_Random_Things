@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Tim_Random_Things.iml" filepath="$PROJECT_DIR$/.idea/modules/Tim_Random_Things.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Tim_Random_Things.client.iml" filepath="$PROJECT_DIR$/.idea/modules/Tim_Random_Things.client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Tim_Random_Things.main.iml" filepath="$PROJECT_DIR$/.idea/modules/Tim_Random_Things.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Tim_Random_Things.test.iml" filepath="$PROJECT_DIR$/.idea/modules/Tim_Random_Things.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/top.tim.AirdropMod.Tim_Random_Things.client.iml" filepath="$PROJECT_DIR$/.idea/modules/top.tim.AirdropMod.Tim_Random_Things.client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/top.tim.AirdropMod.Tim_Random_Things.main.iml" filepath="$PROJECT_DIR$/.idea/modules/top.tim.AirdropMod.Tim_Random_Things.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/top.tim.AirdropMod.Tim_Random_Things.test.iml" filepath="$PROJECT_DIR$/.idea/modules/top.tim.AirdropMod.Tim_Random_Things.test.iml" />
+    </modules>
+  </component>
+</project>
