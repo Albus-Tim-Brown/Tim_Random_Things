@@ -36,6 +36,9 @@ dependencies {
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+    implementation 'org.tomlj:tomlj:1.1.1'
+    implementation 'com.eclipsesource.minimal-json:minimal-json:0.9.5'
+    implementation 'com.google.gson:gson:2.12.1'
 }
 
 processResources {

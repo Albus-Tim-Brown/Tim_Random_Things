@@ -5,29 +5,63 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:diamond_sword",
-          "functions": [
-            {"function": "minecraft:enchant_randomly", "enchantments": ["sharpness", "fire_aspect"]},
-            {"function": "minecraft:set_name", "name": {"text": "Epic_Sword", "color": "dark_red"}}
-          ]
-        },
-        {
-          "type": "minecraft:item",
           "name": "minecraft:enchanted_golden_apple",
           "weight": 2,
-          "functions": [{"function": "minecraft:set_count", "count": 3}]
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1,
+                "max": 5
+              }
+            }
+          ]
         },
         {
           "type": "minecraft:item",
           "name": "minecraft:golden_apple",
           "weight": 4,
-          "functions": [{"function": "minecraft:set_count", "count": 10}]
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1,
+                "max": 9
+              }
+            }
+          ]
         },
         {
           "type": "minecraft:item",
           "name": "minecraft:golden_carrot",
           "weight": 10,
-          "functions": [{"function": "minecraft:set_count", "count": 17}]
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 10,
+                "max": 20
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:experience_bottle",
+          "weight": 8,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 16,
+                "max": 32
+              }
+            }
+          ]
         }
       ]
     }

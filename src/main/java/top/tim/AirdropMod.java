@@ -1,7 +1,6 @@
 package top.tim;
 
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.minecraft.block.entity.ChestBlockEntity;
 import net.minecraft.loot.LootTable;
@@ -18,14 +17,16 @@ import net.minecraft.block.Blocks;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.List;
+import java.util.*;
 
 public class AirdropMod implements ModInitializer {
     public static final String MOD_ID = "tim_random_things";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
     private int timer = 0;
     private int nextTriggerTime = 300;
-
+    private final List<AirDropInfo> airDropList = new ArrayList<>();
+    // 1小时 = 3600秒，每秒20 tick
+    private static final int AIRDROP_EXPIRATION_TIME = 3600 * 20;
 
     @Override
     public void onInitialize() {
@@ -42,6 +43,7 @@ public class AirdropMod implements ModInitializer {
                 spawnAirdrop(server);
                 resetTimer();
             }
+            checkExpiredAirdrops(server);
         }
     }
 
@@ -67,7 +69,8 @@ public class AirdropMod implements ModInitializer {
         ChestBlockEntity chest = (ChestBlockEntity) world.getBlockEntity(pos);
         if (chest != null) {
             Identifier lootTableId = Identifier.of(MOD_ID, "chests/airdrop");
-            RegistryKey<LootTable> lootTableKey = RegistryKey.of(RegistryKeys.LOOT_TABLE, lootTableId);
+            RegistryKey<LootTable> lootTableKey =
+                    RegistryKey.of(RegistryKeys.LOOT_TABLE, lootTableId);
             chest.setLootTable(lootTableKey, world.random.nextLong());
         }
 
@@ -80,12 +83,39 @@ public class AirdropMod implements ModInitializer {
                 0.1
         );
 
-        server.getPlayerManager().broadcast(Text.literal("§e空投将在 30 秒后到达！"), false);
+        // 记录空投信息
+        airDropList.add(new AirDropInfo(pos, timer));
+
+        // 在公屏上显示空投坐标
+        server.getPlayerManager().broadcast(Text.literal("§e空投将在 30 秒后到达！坐标: "
+                + pos.getX() + ", " + pos.getY() + ", " + pos.getZ()), false);
     }
 
+    private void checkExpiredAirdrops(MinecraftServer server) {
+        ServerWorld world = server.getOverworld();
+        Iterator<AirDropInfo> iterator = airDropList.iterator();
+        while (iterator.hasNext()) {
+            AirDropInfo airDrop = iterator.next();
+            if (timer - airDrop.spawnTime >= AIRDROP_EXPIRATION_TIME) {
+                // 移除过期的空投
+                world.setBlockState(airDrop.pos, Blocks.AIR.getDefaultState());
+                iterator.remove();
+            }
+        }
+    }
 
     private void resetTimer() {
         timer = 0;
         nextTriggerTime = 300 + (int) (Math.random() * 600);
+    }
+
+    private static class AirDropInfo {
+        BlockPos pos;
+        int spawnTime;
+
+        public AirDropInfo(BlockPos pos, int spawnTime) {
+            this.pos = pos;
+            this.spawnTime = spawnTime;
+        }
     }
 }
